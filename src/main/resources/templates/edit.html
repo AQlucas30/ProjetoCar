@@ -1,0 +1,7 @@
+<!-- ... -->
+<form th:action="@{/car/edit}" th:object="${car}" method="post">
+    <!-- ... -->
+    <label>Image URL: <input type="text" th:field="*{image}" /></label><br/>
+    <input type="submit" value="Save" />
+</form>
+<!-- ... -->

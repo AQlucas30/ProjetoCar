@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Task Manager</title>
+</head>
+<body>
+	<h1>Task List</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Brand</th>
+			<th>Model</th>
+			<th>Year</th>
+			<th>Name</th>
+			<th>Image</th>
+			<th></th>
+		</tr>
+		<tr th:each="car : ${cars}">
+			<td th:text="${car.id}"></td>
+			<td th:text="${car.marca}"></td>
+			<td th:text="${car.modelo}"></td>
+			<td th:text="${car.ano}"></td>
+			<td th:text="${car.nome}"></td>
+			<td><img th:src="${car.image}"
+				style="max-width: 100px; max-height: 100px;" /></td>
+			
+		</tr>
+	
+</body>
+</html>
