@@ -1,7 +1,9 @@
 package carros.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import carros.Model.Car;
 import carros.Repository.CarRepository;
 
+@Controller
 public class CarController {
 	
 	
@@ -18,17 +21,17 @@ public class CarController {
 	
 	@GetMapping("/")
 	public String listCar(Model model) {
-		model.addAttribute("cars", carRepository.findAll());
-		return "cars/list";
+		model.addAttribute("car", carRepository.findAll());
+		return "/car/list";
 	}
 	
-	@GetMapping("/cars/add")
+	@GetMapping("/car/add")
 	public String addCarsForm(Model model) {
 		model.addAttribute("car", new Car());
 		return "car/add";
 	}
 	
-	@PostMapping("/task/add")
+	@PostMapping("/car/add")
 	public String addCar(@ModelAttribute Car car) {
 		carRepository.save(car);
 		return "redirect:/";
@@ -52,6 +55,16 @@ public class CarController {
 		carRepository.deleteById(id);
 		return "redirect:/";
 	}
+	
+	@Controller
+	public class ErrorController {
+
+	    @ExceptionHandler(value = { org.springframework.web.servlet.NoHandlerFoundException.class })
+	    public String handleNotFoundError() {
+	        return "erro"; // Caminho para a página de erro 404 personalizada
+	    }
+	}
+
 	
 	
 
